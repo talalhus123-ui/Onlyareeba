@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Areeba 💖</title>
+
+<style>
+body {
+  font-family: Arial;
+  text-align: center;
+  margin: 0;
+  transition: background 0.5s;
+}
+.container { padding: 20px; max-width: 650px; margin: auto; }
+button {
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+}
+.hidden { display: none; }
+img { width: 220px; border-radius: 12px; margin-top: 10px; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- INTRO -->
+<div id="intro">
+  <h1>This website is for Areeba 💖</h1>
+  <h2>Khandani</h2>
+  <button onclick="start()">Let's go ➡️</button>
+</div>
+
+<!-- COLOR -->
+<div id="colorPage" class="hidden">
+  <h2>What's your favorite color? 🎨</h2>
+  <button onclick="chooseColor('pink')">Pink 💗</button>
+  <button onclick="chooseColor('lightblue')">Blue 💙</button>
+  <button onclick="chooseColor('yellow')">Yellow 💛</button>
+  <button onclick="chooseColor('lavender')">Purple 💜</button>
+</div>
+
+<!-- QUESTIONS -->
+<div id="quiz" class="hidden">
+  <h2 id="q"></h2>
+  <div id="opts"></div>
+</div>
+
+<!-- WHITE PAGE -->
+<div id="white" class="hidden">
+  <h2>Do you know how you look when you wear white? 🤍</h2>
+  <button onclick="whiteYes()">Yes, I wanna know 💖</button>
+  <button onclick="goFinal()">No 😶</button>
+</div>
+
+<!-- LINES SCREEN -->
+<div id="lines" class="hidden">
+  <h2>These lines were made for you 💖</h2>
+  <button onclick="goFinal()">Next ➡️</button>
+</div>
+
+<!-- FINAL QUESTION -->
+<div id="final" class="hidden">
+  <h2>Do you love me? 💖</h2>
+  <img src="https://i.ibb.co/cKZRR9X5/IMG-20260502-110234.jpg">
+
+  <button onclick="showNote()">Yes, I do 💖</button>
+
+  <button id="noBtn"
+    onmouseover="moveNo()"
+    ontouchstart="moveNo()">
+    No 😶
+  </button>
+
+  <button onclick="secret()">Yes, but how you got my picture? 😏</button>
+</div>
+
+<!-- NOTE -->
+<div id="note" class="hidden">
+  <h2>💌 A Small Note</h2>
+  <p>
+    I didn’t sleep for a long time making this website.<br><br>
+    I started it when I knew your birthday.<br>
+    I wanted to give it on 30 April but I was a bit late.<br><br>
+    Please don’t get mad at me 🙂<br><br>
+    I just wanted to make something special for you.
+  </p>
+  <button onclick="endPage()">Next ➡️</button>
+</div>
+
+<!-- END -->
+<div id="end" class="hidden">
+  <h2>💖 The End</h2>
+  <p>
+    Before you leave…<br><br>
+    This wasn’t just a website.<br>
+    It was time, effort, and late nights.<br><br>
+    Maybe it’s simple… but it’s real.<br><br>
+    If it made you smile even a little,<br>
+    then it was worth everything 💖
+  </p>
+</div>
+
+</div>
+
+<!-- AUDIO -->
+<audio id="song">
+  <source src="https://raw.githubusercontent.com/talalhus123-ui/Tareefa/main/Tareefa-.mp3">
+</audio>
+
+<script>
+
+let step = 0;
+
+const questions = [
+  {q:"What do you think about me?", a:["Great 💖","Okay 🙂","Not sure 🤔"]},
+  {q:"How comfortable are you?", a:["Very 💬","Shy 😳","Neutral 🙂"]},
+  {q:"What do you value?", a:["Honesty 💖","Kindness 🤍","Nothing specific 🙂"]},
+  {q:"Do you enjoy chats?", a:["Yes 💖","Sometimes 🙂","Not really 😶"]},
+  {q:"What do you think about this effort?", a:["Amazing 💖","Good 🙂","It’s okay 🤔"]},
+  {q:"Would you remember this moment?", a:["Yes 💖","Maybe 🙂","No 😶"]}
+];
+
+function start(){
+  intro.classList.add("hidden");
+  colorPage.classList.remove("hidden");
+}
+
+function chooseColor(color){
+  document.body.style.background = color;
+  colorPage.classList.add("hidden");
+  quiz.classList.remove("hidden");
+  load();
+}
+
+function load(){
+  if(step < questions.length){
+    q.innerText = questions[step].q;
+    opts.innerHTML = "";
+    questions[step].a.forEach(opt=>{
+      let btn = document.createElement("button");
+      btn.innerText = opt;
+      btn.onclick = ()=>{ step++; load(); };
+      opts.appendChild(btn);
+    });
+  } else {
+    quiz.classList.add("hidden");
+    white.classList.remove("hidden");
+  }
+}
+
+function whiteYes(){
+  song.play();
+  white.classList.add("hidden");
+  lines.classList.remove("hidden");
+}
+
+function goFinal(){
+  white.classList.add("hidden");
+  lines.classList.add("hidden");
+  final.classList.remove("hidden");
+}
+
+function moveNo(){
+  let b = document.getElementById("noBtn");
+  b.style.position="relative";
+  b.style.left = Math.random()*200 + "px";
+  b.style.top = Math.random()*100 + "px";
+}
+
+function secret(){
+  alert("I am a developer, hacker, and coder 😎 You think it's far from me?");
+  showNote();
+}
+
+function showNote(){
+  final.classList.add("hidden");
+  note.classList.remove("hidden");
+}
+
+function endPage(){
+  note.classList.add("hidden");
+  end.classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
